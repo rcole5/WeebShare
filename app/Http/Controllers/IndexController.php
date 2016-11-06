@@ -10,7 +10,7 @@ class IndexController extends Controller
     public function page($page = 1)
     {
         // Number of pictures displayed on the page.
-        $maxPictures = 4;
+        $maxPictures = 8;
 
         // Calculate the offset for the database.
         $offset = $page * $maxPictures - $maxPictures;
