@@ -1,0 +1,163 @@
+body {
+    background-color: #F0F0F0;
+}
+
+.row {
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    margin-bottom: 15px;
+}
+
+/* Forms */
+.form-control {
+    width: auto;
+}
+
+.panel-heading h3 {
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
+
+.btn-primary {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-color: #269d9d;
+    transition: background-color 0.25s;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #208f8f;
+    transition: background-color 0.25s;
+}
+
+.btn-primary:active {
+    background-color: #185858;
+    transition: background-color 0.25s;
+}
+
+.errors, .red {
+    color: #ff2222;
+}
+
+/* Index */
+.btn-toolbar {
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    /* You can set flex-wrap and flex-direction individually */
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* Or do it all in one line with flex flow */
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    /* tweak the where items line up on the row */
+    /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+}
+
+/* Image Display */
+.image {
+    max-width: 1300px;
+}
+
+.panel-heading, h1.heading {
+    margin-top: 0;
+}
+
+.panel-body img {
+    max-width: 100%;
+}
+
+div.gallery-image {
+    border:1px solid rgb(0,0,0);
+    /*max-width:175px;*/
+    width:202px;
+    height:auto;
+}
+
+div.gallery-image img {
+    margin:0;
+    padding:0;
+    max-width:200px;
+}
+
+.thumbnail {
+    float:left;
+    width:300px;
+    margin: 10px;
+}
+
+.thumbnail img {
+    max-width:100%;
+    max-height: 250px;
+}
+
+a.btn.btn-default.action-button:active {
+    border-radius:0;
+    background:#185858;
+}
+
+.picture-container {
+    height: 250px;
+}
+
+.gallery-item img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.caption {
+    height: 5em;
+}
+
+.caption a {
+    color: #333;
+}
+
+.caption a:hover {
+    text-decoration: none;
+}
+
+.index-gallery {
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    /* You can set flex-wrap and flex-direction individually */
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* Or do it all in one line with flex flow */
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    /* tweak the where items line up on the row */
+    /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+}
+
+/* Comments */
+span.comment {
+    font-size: 1.2em;
+}
+
+p.comment {
+
+}
