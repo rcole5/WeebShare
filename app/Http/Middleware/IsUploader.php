@@ -3,6 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class IsUploader
 {
@@ -11,11 +14,21 @@ class IsUploader
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  int $pid
      * @return mixed
      */
-    public function handle($request, Closure $next, $pid)
+    public function handle($request, Closure $next)
     {
-        return $next($request);
+        // Get image uploader
+        $uploader = DB::table('pictures')
+            ->where('picture_id', $request->pid)
+            ->select('user_id')
+            ->first();
+
+        // Check if user is uploader
+        if (Auth::id() == $uploader->user_id) {
+            return $next($request);
+        }
+
+        return Redirect::to("/image/1");
     }
 }

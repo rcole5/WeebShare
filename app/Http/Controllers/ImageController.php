@@ -120,6 +120,66 @@ class ImageController extends Controller
     public function edit($pid)
     {
         // TODO: Create edit function.
-        return Redirect::to('/home');
+
+        /* Database Queries */
+        // Get the specified picture.
+        $picture = DB::table('pictures')
+            ->where('picture_id', $pid)
+            ->first();
+
+        // Get the uer that uploaded the picture.
+        $user = DB::table('users')
+            ->where('id', $picture->user_id)
+            ->first();
+
+        // Get the picture tags.
+        $tags = DB::table('tags')
+            ->join('picture_tags', 'tags.tag_id', '=', 'picture_tags.tag_id')
+            ->where('picture_tags.picture_id', $picture->picture_id)
+            ->get();
+
+
+
+        return view('image/editimage', [
+            'pid' => $pid,
+            'picture' => $picture,
+        ]);
+    }
+
+    public function editTitle(Request $request, $pid)
+    {
+        if ($request->input('title') == null) {
+            Session::flash('title_error', 'Error: No title provided.');
+            return Redirect::to('/image/' . $pid . '/edit/');
+        }
+
+        DB::table('pictures')
+            ->where('picture_id', $pid)
+            ->update([
+            'picture_title' => $request->input('title')
+        ]);
+        Session::flash('title_success', 'Title updated.');
+        return Redirect::to('/image/' . $pid . '/edit/');
+    }
+
+    public function editDescription(Request $request, $pid)
+    {
+        if ($request->input('description') == null) {
+            Session::flash('description_error', 'Error: No description provided.');
+            return Redirect::to('/image/' . $pid . '/edit/');
+        }
+
+        DB::table('pictures')
+            ->where('picture_id', $pid)
+            ->update([
+                'picture_description' => $request->input('description')
+            ]);
+        Session::flash('description_success', 'Description updated.');
+        return Redirect::to('/image/' . $pid . '/edit/');
+    }
+
+    public function deleteImage($pid)
+    {
+
     }
 }

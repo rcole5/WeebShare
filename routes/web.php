@@ -16,7 +16,7 @@ Route::get('/', 'IndexController@page');
 
 Route::get('/page/{page?}', 'IndexController@page');
 
-/* Set Up Auth Routes */
+/* Auth Routes */
 Auth::routes();
 
 /* Upload Routes */
@@ -27,14 +27,20 @@ Route::post('upload/upload', 'UploadController@upload');
 Route::get('upload/upload', 'UploadController');
 
 /* Image Routes */
-//Route::get('/image', 'ImageController@index');
 Route::get('/image', 'ImageController@noImage');
 
 Route::get('/image/{pid}', 'ImageController@index');
 
 // Edit Image.
-Route::get('/image/{pid}/edit', 'ImageController@edit');
+Route::get('/image/{pid}/edit', 'ImageController@edit')->middleware('uploader');
 
+Route::post('/image/{pid}/edit/title', 'ImageController@editTitle')->middleware('uploader');
+
+Route::post('/image/{pid}/edit/description', 'ImageController@editDescription')->middleware('uploader');
+
+Route::post('/image/{pid}/edit/delete', 'ImageController@deleteImage')->middleware('uploader');
+
+// Comments
 Route::post('image/comment', 'ImageController@comment');
 
 Route::get('image/comment', 'ImageController');

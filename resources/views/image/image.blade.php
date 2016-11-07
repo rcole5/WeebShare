@@ -60,10 +60,10 @@
                 <br>
 
                 <!-- Display Comments -->
-                    @foreach ($comments as $comment)
-                        <span class="comment">{{ $comment->name }} ({{ $comment->comment_count }}) on {{ $comment->comment_date }}</span>
-                        <p class="comment">{{ $comment->comment_text }}</p>
-                    @endforeach
+                @foreach ($comments as $comment)
+                    <span class="comment">{{ $comment->name }} ({{ $comment->comment_count }}) on {{ $comment->comment_date }}</span>
+                    <p class="comment">{{ $comment->comment_text }}</p>
+                @endforeach
 
             </div>
                 </div>

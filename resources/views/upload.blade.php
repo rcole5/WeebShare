@@ -9,7 +9,7 @@
                     <div class="panel-body">
 
                         <div class="form-group{{ $errors->has('') ? ' has-error' : '' }}">
-                            {!! Form::open(array('url'=>'upload/upload','method'=>'POST', 'files'=>true)) !!}
+                            {!! Form::open(array('url'=>'/upload/upload','method'=>'POST', 'files'=>true)) !!}
                             <div class="control-group">
                                 <div class="controls">
                                     <!-- Image Title Input -->
