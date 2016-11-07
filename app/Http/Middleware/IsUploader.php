@@ -29,6 +29,6 @@ class IsUploader
             return $next($request);
         }
 
-        return Redirect::to("/image/1");
+        return Redirect::to('/image/' . $request->pid);
     }
 }
