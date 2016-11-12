@@ -6,7 +6,27 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="edit-heading">Edit Image | </h3><h4 id="delete" class="edit-heading">Delete Image</h4></div>
+                    <div class="panel-heading"><h3 class="edit-heading">Edit Image | </h3><h4 id="delete" class="edit-heading" data-toggle="modal" data-target="#confirm-delete">Delete Image</h4></div>
+                    <!-- Delete Confirm Popup -->
+                    <div id="confirm-delete" class="modal fade" role="alertdialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Delete Image</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete this image?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    {!! Form::open(array('url' => '/image/' . $picture->picture_id . '/edit/delete')) !!}
+                                        {!! Form::submit('Yes', array('class' => 'btn btn-primary')) !!}
+                                        {!! Form::button('No', array('class' => 'btn btn-primary', 'data-dismiss' => 'modal')) !!}
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="panel-body">
                         <!-- Edit Title -->
                         {!! Form::open(array('id' => 'edit-title')) !!}

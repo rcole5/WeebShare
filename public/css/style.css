@@ -169,7 +169,8 @@ p.comment {
 /* Edit */
 img.edit-image {
     max-height: 750px;
-    margin: 20px;
+    margin: 20px 0 20px 0;
+    max-width: 100%;
 }
 
 p.success {
@@ -201,5 +202,5 @@ li.tag-group {
     padding: 10px 0 10px 10px;
 }
 
-span.tag {
+.modal-footer {
 }

@@ -38,6 +38,9 @@
 
                 <div class="panel-heading"><h1 class="heading">Gallery</h1></div>
                 <div class="panel-body">
+                    @if(Session::has('notify'))
+                        <p class="error">{{ Session::get('notify') }}</p>
+                    @endif
                     <div class="index-gallery">
                     @foreach ($pictures as $p)
                         <div class="thumbnail gallery-item">

@@ -267,6 +267,19 @@ class ImageController extends Controller
      */
     public function deleteImage($pid)
     {
+        // Get picture information;
+        $picture = DB::table('pictures')
+            ->where('picture_id', $pid)
+            ->first();
 
+        // Delete the image.
+        unlink('../public' . $picture->picture_location . $picture->picture_name . '.' . $picture->picture_extension);
+
+        DB::table('pictures')
+            ->where('picture_id', $pid)
+            ->delete();
+
+        Session::flash('notify', 'Image deleted.');
+        return Redirect::to('/');
     }
 }
