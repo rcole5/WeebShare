@@ -209,6 +209,7 @@ class ImageController extends Controller
      */
     public function addTags(Request $request, $pid)
     {
+        // Array that contains the new tags.
         $newTags = [];
 
         // Check if tag is empty.
@@ -219,8 +220,8 @@ class ImageController extends Controller
             $tags = explode(',', $request->input('tags'));
             $tags = array_unique(array_map('trim', $tags));
 
-            /* Check if the tags are already in the database */
             foreach ($tags as $tag) {
+                // Check if the tag is in the database.
                 $exists = DB::table('tags')
                     ->where('tag_name', $tag)
                     ->first();
@@ -236,12 +237,14 @@ class ImageController extends Controller
                         ->first();
                 }
 
+                // Check if image is already tagged.
                 $tagInImage = DB::table('picture_tags')
                     ->where('tag_id', $exists->tag_id)
                     ->where('picture_id', $pid)
                     ->get();
 
                 if (sizeof($tagInImage) == 0) {
+                    // Add link image and tag.
                     DB::table('picture_tags')->insert([
                         'picture_id' => $pid,
                         'tag_id' => $exists->tag_id
@@ -253,6 +256,7 @@ class ImageController extends Controller
             $response_array['status'] = 'success';
             $response_array['tags'] = $newTags;
         }
+        // Send the json.
         print json_encode($response_array);
     }
 
