@@ -40,7 +40,7 @@
                                 {!! Session::get('description_error') !!}
                             @endif
                         </p>
-                            <label for="title">Description: </label>
+                            <label for="edit-description">Description: </label>
                             <br>
                             {!! Form::textArea('description', $picture->picture_description, ['size'=>'65x3', 'class'=>'form-control-static']) !!}
                             <br>
@@ -48,6 +48,19 @@
                         {!! Form::close() !!}
 
                         <!-- Edit Tags -->
+                        {!! Form::open(array('id' => 'edit-tags')) !!}
+                            <label for="edit-tags">Edit tags (separate with ,):</label><br>
+                            {!! Form::text('tags', null, ['class' => 'form-control-static edit-text', 'id' => 'add-tag']) !!}
+                            {!! Form::submit('Add', array('class' => 'btn btn-primary')) !!}
+                        {!! Form::close() !!}
+                        <ul id="tag-list" class="tags">
+                        @foreach($tags as $tag)
+                            <li class="input-group tag-group">
+                                <span class="tag">{{ $tag->tag_name }}</span>
+                                <button class="btn btn-primary">X</button>
+                            </li>
+                        @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>

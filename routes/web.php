@@ -38,6 +38,8 @@ Route::post('/image/{pid}/edit/title', 'ImageController@editTitle')->middleware(
 
 Route::post('/image/{pid}/edit/description', 'ImageController@editDescription')->middleware('uploader');
 
+Route::post('/image/{pid}/edit/addtags', 'ImageController@addTags')->middleware('uploader');
+
 Route::post('/image/{pid}/edit/delete', 'ImageController@deleteImage')->middleware('uploader');
 
 // Comments

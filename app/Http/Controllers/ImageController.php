@@ -142,6 +142,7 @@ class ImageController extends Controller
         return view('image/editimage', [
             'pid' => $pid,
             'picture' => $picture,
+            'tags' => $tags,
         ]);
     }
 
@@ -184,7 +185,7 @@ class ImageController extends Controller
         if ($request->input('description') == null) {
 //            Session::flash('description_error', 'Error: No description provided.');
 //            return Redirect::to('/image/' . $pid . '/edit/');
-            $response_array['status'] =$request->input('description') ;
+            $response_array['status'] = 'error';
         } else {
 
             DB::table('pictures')
@@ -197,6 +198,61 @@ class ImageController extends Controller
 //            return Redirect::to('/image/' . $pid . '/edit/');
         }
         // Send the json.
+        print json_encode($response_array);
+    }
+
+    /**
+     * Add tags to an image.
+     *
+     * @param Request $request
+     * @param $pid
+     */
+    public function addTags(Request $request, $pid)
+    {
+        $newTags = [];
+
+        // Check if tag is empty.
+        if ($request->input('tags') == null || $request->input('tags') == "") {
+            $response_array['status'] = 'error';
+        } else {
+            // Get tags.
+            $tags = explode(',', $request->input('tags'));
+            $tags = array_unique(array_map('trim', $tags));
+
+            /* Check if the tags are already in the database */
+            foreach ($tags as $tag) {
+                $exists = DB::table('tags')
+                    ->where('tag_name', $tag)
+                    ->first();
+
+                if (sizeof($exists) == 0) {
+                    // Add tag to database.
+                    DB::table('tags')->insert([
+                        'tag_name' => $tag
+                    ]);
+
+                    $exists = DB::table('tags')
+                        ->where('tag_name', $tag)
+                        ->first();
+                }
+
+                $tagInImage = DB::table('picture_tags')
+                    ->where('tag_id', $exists->tag_id)
+                    ->where('picture_id', $pid)
+                    ->get();
+
+                if (sizeof($tagInImage) == 0) {
+                    DB::table('picture_tags')->insert([
+                        'picture_id' => $pid,
+                        'tag_id' => $exists->tag_id
+                    ]);
+                    array_push($newTags, $tag);
+                }
+            }
+
+            $response_array['status'] = 'success';
+            $response_array['tags'] = $newTags;
+        }
         print json_encode($response_array);
     }
 
