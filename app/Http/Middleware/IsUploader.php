@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class IsUploader
 {
@@ -29,6 +30,7 @@ class IsUploader
             return $next($request);
         }
 
+        Session::flash('user_error', 'Only the image uploader can edit the image.');
         return Redirect::to('/image/' . $request->pid);
     }
 }

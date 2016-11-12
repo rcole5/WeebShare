@@ -27,8 +27,18 @@
         <div class="col-md-8">
             <div class="panel panel-default">
 
-            <div class="panel-heading"><h1 class="heading">{{ $title }}</h1></div>
+            <div class="panel-heading">
+                <h1 class="heading">
+                    {{ $title }}
+                    @if(Auth::id() == $picture->user_id)
+                        | <a href="/image/{{ $picture->picture_id }}/edit">edit</a>
+                    @endif
+                </h1>
+            </div>
             <div class="panel-body">
+                @if (Session::has('user_error'))
+                    <p class="errors">{!! Session::get('user_error') !!}</p>
+                @endif
                 <img class='image' src="{{ $url }}">
             </div>
 

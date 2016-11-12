@@ -57,6 +57,7 @@ class ImageController extends Controller
             'title' => $picture->picture_title,
             'upload_date' => $picture->upload_date,
             'description' => $picture->picture_description,
+            'picture' => $picture,
             'username' => $user->name,
             'upload_count' => $user->upload_count,
             'tags' => $tags,
@@ -138,46 +139,72 @@ class ImageController extends Controller
             ->where('picture_tags.picture_id', $picture->picture_id)
             ->get();
 
-
-
         return view('image/editimage', [
             'pid' => $pid,
             'picture' => $picture,
         ]);
     }
 
+    /**
+     * Edits the image title.
+     *
+     * @param Request $request
+     * @param $pid
+     */
     public function editTitle(Request $request, $pid)
     {
+        // Check if title is empty.
         if ($request->input('title') == null) {
-            Session::flash('title_error', 'Error: No title provided.');
-            return Redirect::to('/image/' . $pid . '/edit/');
+//            Session::flash('title_error', 'Error: No title provided.');
+//            return Redirect::to('/image/' . $pid . '/edit/');
+            $response_array['status'] = 'error';
+        } else {
+            DB::table('pictures')
+                ->where('picture_id', $pid)
+                ->update([
+                    'picture_title' => $request->input('title')
+                ]);
+            $response_array['status'] = 'success';
+//            Session::flash('title_success', 'Title updated.');
+//            return Redirect::to('/image/' . $pid . '/edit/');
         }
-
-        DB::table('pictures')
-            ->where('picture_id', $pid)
-            ->update([
-            'picture_title' => $request->input('title')
-        ]);
-        Session::flash('title_success', 'Title updated.');
-        return Redirect::to('/image/' . $pid . '/edit/');
+        // Send the json.
+        print json_encode($response_array);
     }
 
+    /**
+     * Edits the image description.
+     *
+     * @param Request $request
+     * @param $pid
+     */
     public function editDescription(Request $request, $pid)
     {
+        // Check if description is empty.
         if ($request->input('description') == null) {
-            Session::flash('description_error', 'Error: No description provided.');
-            return Redirect::to('/image/' . $pid . '/edit/');
-        }
+//            Session::flash('description_error', 'Error: No description provided.');
+//            return Redirect::to('/image/' . $pid . '/edit/');
+            $response_array['status'] =$request->input('description') ;
+        } else {
 
-        DB::table('pictures')
-            ->where('picture_id', $pid)
-            ->update([
-                'picture_description' => $request->input('description')
-            ]);
-        Session::flash('description_success', 'Description updated.');
-        return Redirect::to('/image/' . $pid . '/edit/');
+            DB::table('pictures')
+                ->where('picture_id', $pid)
+                ->update([
+                    'picture_description' => $request->input('description')
+                ]);
+            $response_array['status'] = 'success';
+//            Session::flash('description_success', 'Description updated.');
+//            return Redirect::to('/image/' . $pid . '/edit/');
+        }
+        // Send the json.
+        print json_encode($response_array);
     }
 
+    /**
+     * Deletes the image.
+     *
+     * @param $pid
+     */
     public function deleteImage($pid)
     {
 
