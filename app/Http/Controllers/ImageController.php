@@ -249,13 +249,38 @@ class ImageController extends Controller
                         'picture_id' => $pid,
                         'tag_id' => $exists->tag_id
                     ]);
-                    array_push($newTags, $tag);
+                    $x = ["name" => $tag, "crypt" => Crypt::encrypt($exists->tag_id)];
+                    array_push($newTags, $x);
                 }
             }
 
             $response_array['status'] = 'success';
             $response_array['tags'] = $newTags;
         }
+        // Send the json.
+        print json_encode($response_array);
+    }
+
+    /**
+     * Removes a tag from the image.
+     *
+     * @param Request $request
+     * @param $pid
+     */
+    public function delTag(Request $request, $pid)
+    {
+        try {
+            $tid = decrypt($request->input('tid'));
+            DB::table('picture_tags')
+                ->where('picture_id', $pid)
+                ->where('tag_id', $tid)
+                ->delete();
+
+            $response_array['status'] = 'success';
+        } catch (DecryptException $e) {
+            $response_array['status'] = 'error';
+        }
+
         // Send the json.
         print json_encode($response_array);
     }

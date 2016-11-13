@@ -6,7 +6,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="edit-heading">Edit Image | </h3><h4 id="delete" class="edit-heading" data-toggle="modal" data-target="#confirm-delete">Delete Image</h4></div>
+                    <div class="panel-heading"><h3 class="edit-heading">Edit Image | </h3><h4 id="delete"
+                                                                                              class="edit-heading"
+                                                                                              data-toggle="modal"
+                                                                                              data-target="#confirm-delete">
+                            Delete Image</h4></div>
                     <!-- Delete Confirm Popup -->
                     <div id="confirm-delete" class="modal fade" role="alertdialog">
                         <div class="modal-dialog">
@@ -20,8 +24,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     {!! Form::open(array('url' => '/image/' . $picture->picture_id . '/edit/delete')) !!}
-                                        {!! Form::submit('Yes', array('class' => 'btn btn-primary')) !!}
-                                        {!! Form::button('No', array('class' => 'btn btn-primary', 'data-dismiss' => 'modal')) !!}
+                                    {!! Form::submit('Yes', array('class' => 'btn btn-primary')) !!}
+                                    {!! Form::button('No', array('class' => 'btn btn-primary', 'data-dismiss' => 'modal')) !!}
                                     {!! Form::close() !!}
                                 </div>
                             </div>
@@ -40,19 +44,20 @@
                                 {!! Session::get('title_error') !!}
                             @endif
                         </p>
-                            <label for="title">Title: </label>
-                            {!! Form::text('title', $picture->picture_title, ['class' => 'form-control-static edit-text']) !!}
-                            {!! Form::submit('Update', array('class'=>'btn btn-primary')) !!}
+                        <label for="title">Title: </label>
+                        {!! Form::text('title', $picture->picture_title, ['class' => 'form-control-static edit-text']) !!}
+                        {!! Form::submit('Update', array('class'=>'btn btn-primary')) !!}
                         {!! Form::close() !!}
 
-                        <!-- Display Image -->
-                        <img class='image edit-image' src="{{ $picture->picture_location . $picture->picture_name . '.' . $picture->picture_extension }}">
+                    <!-- Display Image -->
+                        <img class='image edit-image'
+                             src="{{ $picture->picture_location . $picture->picture_name . '.' . $picture->picture_extension }}">
 
                         <!-- Edit Description -->
                         {!! Form::open(array('id' => 'edit-description')) !!}
                         <p id="description-success" class="success">
                             @if(Session::has('description_success'))
-                               {!! Session::get('description_success') !!}
+                                {!! Session::get('description_success') !!}
                             @endif
                         </p>
                         <p id="description-error" class="errors">
@@ -60,27 +65,28 @@
                                 {!! Session::get('description_error') !!}
                             @endif
                         </p>
-                            <label for="edit-description">Description: </label>
-                            <br>
-                            {!! Form::textArea('description', $picture->picture_description, ['size'=>'65x3', 'class'=>'form-control-static']) !!}
-                            <br>
-                            {!! Form::submit('Update', array('class'=>'btn btn-primary')) !!}
-                        {!! Form::close() !!}
+                        <label for="edit-description">Description: </label>
+                        <br>
+                        {!! Form::textArea('description', $picture->picture_description, ['size'=>'65x3', 'class'=>'form-control-static']) !!}
+                        <br>
+                    {!! Form::submit('Update', array('class'=>'btn btn-primary')) !!}
+                    {!! Form::close() !!}
 
-                        <!-- Edit Tags -->
-                        {!! Form::open(array('id' => 'edit-tags')) !!}
+                    <!-- Edit Tags -->
+                        <div id="display-tags">
+                            {!! Form::open(array('id' => 'edit-tags')) !!}
                             <label for="edit-tags">Edit tags (separate with ,):</label><br>
                             {!! Form::text('tags', null, ['class' => 'form-control-static edit-text', 'id' => 'add-tag']) !!}
                             {!! Form::submit('Add', array('class' => 'btn btn-primary')) !!}
-                        {!! Form::close() !!}
-                        <ul id="tag-list" class="tags">
-                        @foreach($tags as $tag)
-                            <li class="input-group tag-group">
+                            {!! Form::close() !!}
+                            @foreach($tags as $tag)
+                                {!! Form::open(array('id' => 'del-tag', 'class' => 'edit-tag', 'url' => '')) !!}
                                 <span class="tag">{{ $tag->tag_name }}</span>
-                                <button class="btn btn-primary">X</button>
-                            </li>
-                        @endforeach
-                        </ul>
+                                {!! Form::hidden('tid', Crypt::encrypt($tag->tag_id)) !!}
+                                {!! Form::submit('X', array('class' => 'btn btn-primary')) !!}
+                                {!! Form::close() !!}
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

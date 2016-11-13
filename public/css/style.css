@@ -202,5 +202,10 @@ li.tag-group {
     padding: 10px 0 10px 10px;
 }
 
-.modal-footer {
+.edit-tag {
+    display: inline-block;
+    background-color: #269d9d;
+    color: #fff;
+    margin: 4px;
+    padding: 4px 0 4px 10px;
 }
