@@ -17,7 +17,7 @@
                     <h4>Description: </h4>
                     <p>{{ $description }}</p>
                     <br>
-                    <h4>Uploaded by: {{ $username }} ({{ $upload_count }})</h4>
+                    <h4>Uploaded by: <a href="/user/{{ $user->id }}">{{ $username }}</a> ({{ $upload_count }})</h4>
                     <h5>On: {{ $upload_date  }}</h5>
                 </div>
             </div>

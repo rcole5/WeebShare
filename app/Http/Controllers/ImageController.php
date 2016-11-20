@@ -61,6 +61,7 @@ class ImageController extends Controller
             'picture' => $picture,
             'username' => $user->name,
             'upload_count' => $user->upload_count,
+            'user' => $user,
             'tags' => $tags,
             'comments' => $comments,
             'pid' => $pid

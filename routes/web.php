@@ -16,8 +16,10 @@ Route::get('/', 'IndexController@page');
 
 Route::get('/page/{page?}', 'IndexController@page');
 
+
 /* Auth Routes */
 Auth::routes();
+
 
 /* Upload Routes */
 Route::get('/upload', 'UploadController@index')->middleware('auth');
@@ -25,6 +27,7 @@ Route::get('/upload', 'UploadController@index')->middleware('auth');
 Route::post('/upload/upload', 'UploadController@upload');
 
 Route::get('/upload/upload', 'UploadController');
+
 
 /* Image Routes */
 Route::get('/image', 'ImageController@noImage');
@@ -49,7 +52,12 @@ Route::post('/image/comment', 'ImageController@comment');
 
 Route::get('/image/comment', 'ImageController');
 
+
 /* Search Routes */
 Route::get('/search', 'SearchController@index');
 
 
+/* User Routes */
+Route::get('/user', 'UserController@noUser');
+
+Route::get('/user/{uid}', 'UserController@index');
