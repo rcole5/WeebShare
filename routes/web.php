@@ -22,9 +22,9 @@ Auth::routes();
 /* Upload Routes */
 Route::get('/upload', 'UploadController@index')->middleware('auth');
 
-Route::post('upload/upload', 'UploadController@upload');
+Route::post('/upload/upload', 'UploadController@upload');
 
-Route::get('upload/upload', 'UploadController');
+Route::get('/upload/upload', 'UploadController');
 
 /* Image Routes */
 Route::get('/image', 'ImageController@noImage');
@@ -45,10 +45,11 @@ Route::post('/image/{pid}/edit/deltag', 'ImageController@delTag')->middleware('u
 Route::post('/image/{pid}/edit/delete', 'ImageController@deleteImage')->middleware('uploader');
 
 // Comments
-Route::post('image/comment', 'ImageController@comment');
+Route::post('/image/comment', 'ImageController@comment');
 
-Route::get('image/comment', 'ImageController');
+Route::get('/image/comment', 'ImageController');
 
 /* Search Routes */
-Route::get('search', 'SearchController@index');
+Route::get('/search', 'SearchController@index');
+
 
