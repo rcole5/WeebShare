@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <!-- Search Bar -->
                     <h4>Search: </h4>
-                    <form action="/search" method="get">
+                    <form class="sidebar-search" action="/search" method="get">
                         <div class="input-group">
                             <input type="text" class="form-control" name="q">
                             <span class="input-group-btn">
@@ -18,13 +18,13 @@
                             </span>
                         </div>
                     </form>
-                    <br>
+
                     <!-- Tags -->
                     <div class="tags">
                         <h4>Tags on This Page</h4>
                         <ul class="tags">
                             @foreach ($tags as $tag)
-                                <a href="/search?q={{ $tag }}"><li class="tag">{{ $tag }}</li></a>
+                                <a href="/search?q={{ $tag }}"><li class="sidebar-tag">{{ $tag }}</li></a>
                             @endforeach
                         </ul>
                     </div>

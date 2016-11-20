@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <ul class="tags">
                         @foreach ($tags as $tag)
-                            <a href="/search?q={{ $tag->tag_name }}"><li class="tag">{{ $tag->tag_name }}</li></a>
+                            <a href="/search?q={{ $tag->tag_name }}"><li class="sidebar-tag">{{ $tag->tag_name }}</li></a>
                         @endforeach
                     </ul>
                     <br>

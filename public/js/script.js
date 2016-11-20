@@ -71,13 +71,14 @@ $("#edit-tags").submit(function (e) {
                 // console.log(data);
                 console.log(JSON.parse(data).tags[0].name);
                 var tags = JSON.parse(data).tags;
+
                 tags.forEach(function (tag) {
                     var newItem = '<form method="POST" action="http://localhost:8000" accept-charset="UTF-8" id="del-tag" class="edit-tag">';
+                    newItem += '<input type="hidden" name="_token" value="' + tag.token + '">'
                     newItem += '<span class="tag">' + tag.name + '</span>';
-                    newItem += '<input name="tid" value="' + tag.crypt + '" type="hidden">';
+                    newItem += '<input name="tid" value="' + tag.crypt +'" type="hidden">';
                     newItem += '<input class="btn btn-primary" value="X" type="submit">';
                     newItem += '</form>';
-
                     $("#display-tags").append(newItem);
                 });
             }

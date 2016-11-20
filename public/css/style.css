@@ -48,6 +48,18 @@ input.edit-text {
     width: 50%;
 }
 
+/* Sidebar */
+.sidebar-search {
+    margin-bottom: 25px;
+}
+
+.sidebar-tag {
+    text-decoration: none;
+    list-style: none;
+    color: #636b6f;
+    margin-left: 15px;
+}
+
 /* Index */
 .btn-toolbar {
     text-align: center;

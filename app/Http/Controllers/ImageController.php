@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use League\Flysystem\Exception;
 
 class ImageController extends Controller
 {
@@ -249,7 +250,7 @@ class ImageController extends Controller
                         'picture_id' => $pid,
                         'tag_id' => $exists->tag_id
                     ]);
-                    $x = ["name" => $tag, "crypt" => Crypt::encrypt($exists->tag_id)];
+                    $x = ["name" => $tag, "crypt" => Crypt::encrypt($exists->tag_id), "token" => csrf_token()];
                     array_push($newTags, $x);
                 }
             }
@@ -270,14 +271,17 @@ class ImageController extends Controller
     public function delTag(Request $request, $pid)
     {
         try {
-            $tid = decrypt($request->input('tid'));
+            // Decrypt tid.
+            $tid = Crypt::decrypt($request->input('tid'));
+
+            // Remove from database.
             DB::table('picture_tags')
                 ->where('picture_id', $pid)
                 ->where('tag_id', $tid)
                 ->delete();
 
             $response_array['status'] = 'success';
-        } catch (DecryptException $e) {
+        } catch (Exception $e) {
             $response_array['status'] = 'error';
         }
 
