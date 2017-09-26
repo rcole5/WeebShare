@@ -6,4 +6,5 @@ and edit and delete the images that they have uploaded. Users also have the opti
 ## To Do
 - [ ] Add models for database.
 - [ ] Replace all sql queries with model calls.
+- [ ] Add .sql file for importing database schema.
 - [ ] Add API support.
